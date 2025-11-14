@@ -1,88 +1,218 @@
-<!DOCTYPE html><html lang="vi">
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop Bán Acc Game</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f3f4f6;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #4f46e5;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 10px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-    }
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .title {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 10px 0 5px;
-    }
-    .desc {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-      color: #16a34a;
-      margin-bottom: 10px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #4f46e5;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.2s;
-    }
-    button:hover {
-      background: #4338ca;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Acc Game</title>
+    <style>
+        /* CSS để tạo giao diện */
+        body {
+            /* Dùng hình ảnh làm background */
+            background-image: url('background.jpg'); /* Đổi 'background.jpg' thành tên file ảnh của bạn */
+            background-size: cover; /* Đảm bảo ảnh phủ hết màn hình */
+            background-position: center;
+            background-attachment: fixed; /* Giữ ảnh cố định khi cuộn */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white; /* Màu chữ mặc định */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Thêm lớp phủ mờ để dễ đọc chữ hơn */
+            position: relative;
+        }
+
+        /* Lớp phủ (Overlay) để làm mờ background, giúp chữ dễ đọc hơn */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Màu đen, độ mờ 70% */
+            z-index: -1; /* Đặt phía sau nội dung */
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 2px solid #ff4500;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #ff4500; /* Màu cam nổi bật */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+            flex-grow: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #ff4500;
+            border-bottom: 1px solid #ff4500;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Khu vực hiển thị sản phẩm */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: rgba(30, 30, 30, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff4500;
+        }
+
+        .product-card h3 {
+            color: #ff4500;
+            margin-top: 0;
+        }
+
+        .product-card .price {
+            font-size: 1.2em;
+            color: #00ff00; /* Màu xanh lá cây cho giá */
+            font-weight: bold;
+        }
+
+        .buy-btn {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .buy-btn:hover {
+            background-color: #e03b00;
+        }
+
+        /* Khu vực nạp tiền (Placeholder) */
+        .deposit-section {
+            margin-top: 40px;
+            padding: 20px;
+            border: 2px solid #ff4500;
+            border-radius: 10px;
+            background-color: rgba(30, 30, 30, 0.9);
+        }
+
+        .deposit-section p {
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .deposit-form input, .deposit-form button {
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+        
+        .deposit-form input {
+            background-color: #222;
+            color: white;
+        }
+
+        .deposit-form button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .deposit-form button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
 </head>
 <body>
-  <header>Shop Bán Acc Game Giá Rẻ - Uy Tín</header>  <div class="container">
-    <div class="card">
-      <img src="https://via.placeholder.com/300x180" alt="Acc 1" />
-      <div class="title">Acc Liên Quân VIP</div>
-      <div class="desc">90 tướng • 120 trang phục • Rank Cao Thủ</div>
-      <div class="price">1.200.000₫</div>
-      <button>Mua Ngay</button>
-    </div><div class="card">
-  <img src="https://via.placeholder.com/300x180" alt="Acc 2" />
-  <div class="title">Acc Free Fire Đẹp</div>
-  <div class="desc">Nhiều skin súng • Pet hiếm • Level cao</div>
-  <div
+
+    <header class="header">
+        <h1>💀 CHÁY HÀNG: SHOP ACC GAME 💀</h1>
+        <p>Uy tín, chất lượng - Đảm bảo Acc VIP!</p>
+    </header>
+
+    <div class="container">
+
+        <div class="deposit-section">
+            <h2 class="section-title">💸 NẠP TIỀN BẰNG NGÂN HÀNG (Dạng Demo)</h2>
+            
+            <p><strong>Lưu ý:</strong> Chức năng này chỉ là giao diện. Để hoạt động thật, bạn cần tích hợp với cổng thanh toán (Payment Gateway) và lập trình Backend!</p>
+            
+            <form class="deposit-form">
+                <input type="number" placeholder="Số tiền cần nạp (VND)" required>
+                <button type="submit">Tiến hành Nạp tiền</button>
+            </form>
+            
+            <div style="margin-top: 15px;">
+                <p><strong>Thông tin chuyển khoản:</strong></p>
+                <ul>
+                    <li>**Ngân hàng:** Vietcombank</li>
+                    <li>**Số Tài khoản:** 0123456789</li>
+                    <li>**Chủ Tài khoản:** NGUYEN VAN A</li>
+                    <li>**Nội dung chuyển khoản:** NAPTEN-[Tên tài khoản của bạn]</li>
+                </ul>
+            </div>
+        </div>
+
+        ---
+
+        <h2 class="section-title">🎮 DANH SÁCH TÀI KHOẢN HOT</h2>
+        
+        <div class="product-grid">
+            
+            <div class="product-card">
+                <h3>Acc Free Fire VIP</h3>
+                <p>Cấp độ Max, Full Skin Súng Hiếm!</p>
+                <div class="price">500.000 VNĐ</div>
+                <button class="buy-btn">MUA NGAY</button>
+            </div>
+
+            <div class="product-card">
+                <h3>Acc Liên Quân Rank Cao</h3>
+                <p>Rank Thách Đấu, Full Tướng, Skin SSS!</p>
+                <div class="price">850.000 VNĐ</div>
+                <button class="buy-btn">MUA NGAY</button>
+            </div>
+
+            <div class="product-card">
+                <h3>Acc Genshin Impact C6</h3>
+                <p>Có Ký Ức Vĩ Đại, Vũ Khí Độc Quyền!</p>
+                <div class="price">1.200.000 VNĐ</div>
+                <button class="buy-btn">MUA NGAY</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
