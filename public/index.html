@@ -1,0 +1,159 @@
+<!-- public/index.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chat nhóm demo</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:0;background:#f3f4f6}
+    .app{max-width:900px;margin:20px auto;padding:12px;background:white;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+    .row{display:flex;gap:12px}
+    .sidebar{width:260px}
+    .chat{flex:1;display:flex;flex-direction:column;height:70vh}
+    .messages{flex:1;overflow:auto;padding:8px;border:1px solid #eee;border-radius:6px;background:#fff}
+    .message{padding:6px;margin-bottom:8px;border-radius:6px}
+    .system{color:#666;font-size:13px}
+    .controls{display:flex;gap:8px;margin-top:8px}
+    img.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h2>Chat nhóm demo — Đăng ký & chỉnh avatar</h2>
+    <div class="row">
+      <div class="sidebar">
+        <div>
+          <h3>Profile</h3>
+          <div>
+            <label>Tên</label><br />
+            <input id="name" placeholder="Tên của bạn" />
+          </div>
+          <div style="margin-top:8px">
+            <label>Ảnh (chọn file hoặc dán URL)</label><br />
+            <input type="file" id="avatarFile" accept="image/*" />
+            <br />
+            <input id="avatarUrl" placeholder="Hoặc dán link ảnh" />
+          </div>
+          <div style="margin-top:8px">
+            <button id="registerBtn">Đăng ký / Cập nhật</button>
+            <div style="margin-top:6px">ID của bạn: <span id="myId">-</span></div>
+            <div id="myPreview" style="margin-top:8px"></div>
+          </div>
+        </div>
+        <hr />
+        <div>
+          <h3>Người trong phòng</h3>
+          <div id="usersList"></div>
+        </div>
+      </div>
+
+      <div class="chat">
+        <div class="messages" id="messages"></div>
+        <div class="controls">
+          <input id="msgInput" style="flex:1" placeholder="Gõ tin nhắn..." />
+          <button id="sendBtn">Gửi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const API = '';// nếu server cùng origin thì để '', nếu khác thì đặt URL
+    const socket = io(API);
+    let myUser = null; // { id, name, avatar }
+
+    function el(id){return document.getElementById(id)}
+
+    // Load file input as dataURL
+    function fileToDataURL(file){
+      return new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result);
+        r.onerror = rej;
+        r.readAsDataURL(file);
+      });
+    }
+
+    async function register(){
+      const name = el('name').value.trim();
+      const avatarUrlInput = el('avatarUrl').value.trim();
+      const file = el('avatarFile').files[0];
+      let avatar = null;
+      if (file) avatar = await fileToDataURL(file);
+      else if (avatarUrlInput) avatar = avatarUrlInput;
+
+      if (!myUser){
+        // create
+        const r = await fetch(API + '/register', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name, avatar })});
+        const j = await r.json();
+        if (j.ok){ myUser = j.user; el('myId').innerText = myUser.id; }
+      } else {
+        // update
+        const r = await fetch(API + '/update', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ id: myUser.id, name, avatar })});
+        const j = await r.json(); if (j.ok){ myUser = j.user; }
+      }
+      renderMyPreview();
+      socket.emit('join', { userId: myUser && myUser.id });
+    }
+
+    function renderMyPreview(){
+      const wrap = el('myPreview');
+      wrap.innerHTML = '';
+      if (!myUser) return;
+      const img = document.createElement('img'); img.className='avatar'; img.src = myUser.avatar || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"></svg>';
+      const name = document.createElement('div'); name.innerText = myUser.name;
+      wrap.appendChild(img); wrap.appendChild(name);
+    }
+
+    function addMessageNode(m){
+      const container = el('messages');
+      const d = document.createElement('div'); d.className='message';
+      const author = document.createElement('div');
+      const av = document.createElement('img'); av.className='avatar'; av.src = m.user.avatar || '';
+      author.appendChild(av);
+      const nm = document.createElement('strong'); nm.innerText = m.user.name + ': ';
+      author.appendChild(nm);
+      const txt = document.createElement('div'); txt.innerText = m.text;
+      const meta = document.createElement('div'); meta.style.fontSize='11px'; meta.style.color='#666'; meta.innerText = new Date(m.ts).toLocaleTimeString();
+      d.appendChild(author);
+      d.appendChild(txt);
+      d.appendChild(meta);
+      container.appendChild(d);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function renderUsers(list){
+      const wrap = el('usersList'); wrap.innerHTML = '';
+      list.forEach(u => {
+        const item = document.createElement('div');
+        const av = document.createElement('img'); av.className='avatar'; av.src = u.avatar || '';
+        const span = document.createElement('span'); span.innerText = ' ' + u.name + ' (' + u.id + ')';
+        item.appendChild(av); item.appendChild(span);
+        wrap.appendChild(item);
+      });
+    }
+
+    // Events
+    el('registerBtn').addEventListener('click', () => register());
+    el('sendBtn').addEventListener('click', async () => {
+      const text = el('msgInput').value.trim(); if (!text) return;
+      if (!myUser){ alert('Bạn phải đăng ký trước'); return; }
+      socket.emit('message', { userId: myUser.id, text });
+      el('msgInput').value = '';
+    });
+
+    // Socket handlers
+    socket.on('connect', () => console.log('connected to socket'));
+    socket.on('init', (data) => { renderUsers(data.users || []); });
+    socket.on('message', (m) => { addMessageNode(m); });
+    socket.on('system', (s) => { const d = { text: s.text, ts: Date.now(), user: { name:'System', avatar: '' } }; addMessageNode(d); });
+    socket.on('user:update', (u) => {
+      // update user list: fetch current list
+      fetch(API + '/users').then(r=>r.json()).then(list => renderUsers(list));
+    });
+
+  </script>
+</body>
+</html>
