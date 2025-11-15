@@ -3,27 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Acc Game Trọng Magic </title>
+    <title>Shop Acc Game Trọng Magic</title>
     <style>
-        /* CSS để tạo giao diện */
         body {
-            /* 5d8e725c20b1cb3d7e2e116b627d89e2 */
-            background-image: url('1763132926173.jpg'); /* Đổi 'background.jpg' 5d8e725c20b1cb3d7e2e116b627d89e2 */
-            background-size: cover('1763132926173.jpg'); /* 5d8e725c2.0b1cb3d7e2e116b627d89e2 */
-            background-position: center("1763132926173.jpg");
-            background-attachment: fixed("1763132926173.jpg"); /* Giữ ảnh cố định khi cuộn */
+            background-image: url('1763132926173.jpg'); /* Ảnh background của huynh */
+            background-size: cover; /* Phủ full màn hình */
+            background-position: center; /* Canh giữa */
+            background-attachment: fixed; /* Giữ cố định khi cuộn */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: white; /* Màu chữ mặc định */
+            color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* Thêm lớp phủ mờ để dễ đọc chữ hơn */
             position: relative;
         }
 
-        /* Lớp phủ (Overlay) để làm mờ background, giúp chữ dễ đọc hơn */
         body::before {
             content: "";
             position: absolute;
@@ -31,8 +27,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Màu đen, độ mờ 70% */
-            z-index: -1; /* Đặt phía sau nội dung */
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
         }
 
         .header {
@@ -44,7 +40,7 @@
 
         .header h1 {
             margin: 0;
-            color: #ff4500; /* Màu cam nổi bật */
+            color: #ff4500;
         }
 
         .container {
@@ -66,7 +62,6 @@
             margin-bottom: 20px;
         }
 
-        /* Khu vực hiển thị sản phẩm */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -94,7 +89,7 @@
 
         .product-card .price {
             font-size: 1.2em;
-            color: #00ff00; /* Màu xanh lá cây cho giá */
+            color: #00ff00;
             font-weight: bold;
         }
 
@@ -114,7 +109,6 @@
             background-color: #e03b00;
         }
 
-        /* Khu vực nạp tiền (Placeholder) */
         .deposit-section {
             margin-top: 40px;
             padding: 20px;
@@ -183,8 +177,6 @@
             </div>
         </div>
 
-        ---
-
         <h2 class="section-title">🎮 DANH SÁCH TÀI KHOẢN HOT</h2>
         
         <div class="product-grid">
@@ -211,8 +203,3 @@
             </div>
 
         </div>
-
-    </div>
-
-</body>
-</html>
