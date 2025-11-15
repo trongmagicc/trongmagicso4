@@ -6,11 +6,19 @@
 <title>Shop Acc Game Trọng Magic</title>
 <style>
     html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        position: relative;
     }
 
     /* Background ảnh local */
     body {
-        background-image: url('1763132926173.jpg'); /* Ảnh huynh tải về */
+        background-image: url('anime111.jpg'); /* Ảnh huynh tải về */
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -109,11 +117,93 @@
     .deposit-section {
         margin-top: 40px;
         padding: 20px;
-        border: 2px solid rgba(
-           
-            
-            <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'bzyg8hzngf',
-    });
-</script> 
+        border: 2px solid rgba(255,69,0,0.7);
+        border-radius: 10px;
+        background-color: rgba(30,30,30,0.25); /* trong suốt */
+    }
+
+    .deposit-section p {
+        font-style: italic;
+        color: #ccc;
+    }
+
+    .deposit-form input, .deposit-form button {
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .deposit-form input {
+        background-color: rgba(34,34,34,0.7);
+        color: white;
+    }
+
+    .deposit-form button {
+        background-color: rgba(0,123,255,0.8);
+        color: white;
+        cursor: pointer;
+        border: none;
+    }
+
+    .deposit-form button:hover {
+        background-color: rgba(0,86,179,0.9);
+    }
+
+</style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>💸 SHOP ACC GAME Trọng Magic 💸</h1>
+        <p>Uy tín, chất lượng - Đảm bảo Acc VIP!</p>
+    </header>
+
+    <div class="container">
+
+        <div class="deposit-section">
+            <h2 class="section-title">💸 NẠP TIỀN BẰNG NGÂN HÀNG </h2>
+            <p><strong>Lưu ý:</strong></p>
+            <form class="deposit-form">
+                <input type="number" placeholder="Số tiền cần nạp (VND)" required>
+                <button type="submit">Tiến hành Nạp tiền</button>
+            </form>
+            <div style="margin-top: 15px;">
+                <p><strong>Thông tin chuyển khoản:</strong></p>
+                <ul>
+                    <li>**Ngân hàng:** MBBANK</li>
+                    <li>**Số Tài khoản:** 0911619443</li>
+                    <li>**Chủ Tài khoản:** HUYNH THANH TRONG</li>
+                    <li>**Nội dung chuyển khoản:** NAPTEN-[Tên tài khoản của bạn]</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎮 DANH SÁCH TÀI KHOẢN HOT</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <h3>Acc Free Fire VIP</h3>
+                <p>Cấp độ Max, Full Skin Súng Hiếm!</p>
+                <div class="price">500.000 VNĐ</div>
+                <button class="buy-btn">MUA NGAY</button>
+            </div>
+
+            <div class="product-card">
+                <h3>Acc Liên Quân Rank Cao</h3>
+                <p>Rank Thách Đấu, Full Tướng, Skin SSS!</p>
+                <div class="price">850.000 VNĐ</div>
+                <button class="buy-btn">MUA NGAY</button>
+            </div>
+
+            <div class="product-card">
+                <h3>Acc Genshin Impact C6</h3>
+                <p>Có Ký Ức Vĩ Đại, Vũ Khí Độc Quyền!</p>
+                <div class="price">1.200.000 VNĐ</div>
+                <button class="buy-btn">MUA NGAY</button>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
