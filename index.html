@@ -1,55 +1,120 @@
-<header class="header">
-    <h1>💸 SHOP ACC GAME Trọng Magic 💸</h1>
-    <p>Uy tín, chất lượng - Đảm bảo Acc VIP!</p>
-</header>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Acc Game Trọng Magic</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
 
-<div class="container">
+    /* Background ảnh local */
+    body {
+        background-image: url('anime111.jpg'); /* Ảnh huynh tải về */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
 
-    <div class="deposit-section">
-        <h2 class="section-title">💸 NẠP TIỀN BẰNG NGÂN HÀNG </h2>
-        <p><strong>Lưu ý:</strong></p>
+    /* Overlay mờ nhẹ để chữ đọc được */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3); /* giảm opacity để lộ background */
+        z-index: -1;
+    }
 
-        <form class="deposit-form">
-            <input type="number" placeholder="Số tiền cần nạp (VND)" required>
-            <button type="submit">Tiến hành Nạp tiền</button>
-        </form>
+    .header {
+        background-color: rgba(0,0,0,0.5); /* trong suốt hơn */
+        padding: 15px 20px;
+        text-align: center;
+        border-bottom: 2px solid rgba(255,69,0,0.7);
+    }
 
-        <div style="margin-top: 15px;">
-            <p><strong>Thông tin chuyển khoản:</strong></p>
-            <ul>
-                <li><strong>Ngân hàng:</strong> MBBANK</li>
-                <li><strong>Số Tài khoản:</strong> 0911619443</li>
-                <li><strong>Chủ Tài khoản:</strong> HUYNH THANH TRONG</li>
-                <li><strong>Nội dung chuyển khoản:</strong> NAPTEN-[Tên tài khoản của bạn]</li>
-            </ul>
-        </div>
-    </div>
+    .header h1 {
+        margin: 0;
+        color: #ff4500;
+    }
 
-    <h2 class="section-title">🎮 DANH SÁCH TÀI KHOẢN HOT</h2>
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: rgba(0,0,0,0.3); /* trong suốt */
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(255,69,0,0.3);
+        flex-grow: 1;
+    }
 
-    <div class="product-grid">
+    .section-title {
+        text-align: center;
+        color: #ff4500;
+        border-bottom: 1px solid rgba(255,69,0,0.7);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
 
-        <div class="product-card">
-            <h3>Acc Free Fire VIP</h3>
-            <p>Cấp độ Max, Full Skin Súng Hiếm!</p>
-            <div class="price">500.000 VNĐ</div>
-            <button class="buy-btn">MUA NGAY</button>
-        </div>
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
 
-        <div class="product-card">
-            <h3>Acc Liên Quân Rank Cao</h3>
-            <p>Rank Thách Đấu, Full Tướng, Skin SSS!</p>
-            <div class="price">850.000 VNĐ</div>
-            <button class="buy-btn">MUA NGAY</button>
-        </div>
+    .product-card {
+        background-color: rgba(30,30,30,0.25); /* giảm opacity */
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,69,0,0.5); /* border mờ */
+        text-align: center;
+        transition: transform 0.2s;
+    }
 
-        <div class="product-card">
-            <h3>Acc Genshin Impact C6</h3>
-            <p>Có Ký Ức Vĩ Đại, Vũ Khí Độc Quyền!</p>
-            <div class="price">1.200.000 VNĐ</div>
-            <button class="buy-btn">MUA NGAY</button>
-        </div>
+    .product-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(255,69,0,0.9);
+    }
 
-    </div>
+    .product-card h3 {
+        color: #ff4500;
+        margin-top: 0;
+    }
 
-</div>
+    .product-card .price {
+        font-size: 1.2em;
+        color: #00ff00;
+        font-weight: bold;
+    }
+
+    .buy-btn {
+        background-color: rgba(255,69,0,0.8); /* trong suốt vừa phải */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+        transition: background-color 0.2s;
+    }
+
+    .buy-btn:hover {
+        background-color: rgba(224,59,0,0.9);
+    }
+
+    .deposit-section {
+        margin-top: 40px;
+        padding: 20px;
+        border: 2px solid rgba(
