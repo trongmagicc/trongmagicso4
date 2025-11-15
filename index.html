@@ -3,74 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop Acc Game Trọng Magic</title>
+<title>Background Ảnh</title>
 <style>
-    /* Body full màn hình với background ảnh */
-    body {
+    html, body {
         margin: 0;
         padding: 0;
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        background-image: url('./1763132926173.jpg'); /* Ảnh của huynh */
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+        height: 100%;
     }
 
-    /* Overlay mờ để chữ đọc được */
-    body::before {
-        content: "";
-        position: absolute;
-        top:0; left:0;
-        width:100%; height:100%;
-        background-color: rgba(0,0,0,0.6);
-        z-index: -1;
+    body {
+        /* Background ảnh của huynh */
+        background-image: url('1763132926173.jpg'); /* Đặt ảnh cùng folder */
+        background-size: cover;      /* Phủ full màn hình */
+        background-position: center; /* Canh giữa */
+        background-repeat: no-repeat;/* Không lặp lại */
+        background-attachment: fixed; /* Cố định khi cuộn */
     }
-
-    .header {
-        background-color: rgba(0,0,0,0.8);
-        padding: 15px 20px;
-        text-align: center;
-        border-bottom: 2px solid #ff4500;
-    }
-    .header h1 {
-        margin:0;
-        color: #ff4500;
-    }
-
-    .container {
-        width:90%;
-        max-width:1200px;
-        margin:20px auto;
-        padding:20px;
-        background-color: rgba(0,0,0,0.6);
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(255,69,0,0.5);
-        flex-grow:1;
-    }
-
-    .section-title {
-        text-align:center;
-        color:#ff4500;
-        border-bottom:1px solid #ff4500;
-        padding-bottom:10px;
-        margin-bottom:20px;
-    }
-
-    .product-grid {
-        display:grid;
-        grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-        gap:20px;
-    }
-
-    .product-card {
-        background-color: rgba(30,30,30,0.9);
-        padding:15px;
-        border-radius:8px;
-        border:1px solid #444;
-        text-align:center;
-        transition: transform 0.2s;
+</style>
+</head>
+<body>
+</body>
+</html>
